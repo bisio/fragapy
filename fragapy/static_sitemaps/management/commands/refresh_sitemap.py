@@ -63,13 +63,13 @@ class Command(NoArgsCommand):
         ping_google('sitemap.xml')
     
     def write_page(self, site, page, filename):
-        site = Site.objects.all()[0]
+        site_fw_item  = Site.objects.all()[0]
         urls = []
         try:
             if callable(site):
-                urls.extend(site().get_urls(page,site))
+                urls.extend(site().get_urls(page,site_fw_item))
             else:
-                urls.extend(site.get_urls(page,site))
+                urls.extend(site.get_urls(page,site_fw_item))
         except EmptyPage:
             print "Page %s empty" % page
         except PageNotAnInteger:
